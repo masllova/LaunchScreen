@@ -8,22 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
+       @State var showColor1 = false
+        @State var showColor2 = false
+        @State var showColor3 = false
+        @State var showColor4 = false
+        @State var showColor5 = false
+        @State var showHW = false
+    
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        self.clear()
+                    } label: {
+                        Text("clear")
+                            .padding(.horizontal)
+                            .foregroundColor(.white)
+                    } //additional button to clear the screen for re-viewing
+
+                }
             VStack(spacing: 10) {
                 ZStack {
-                    Ellipse1().opacity(0.85)
-                    Ellipse2().opacity(0.85)
-                    Ellipse3().opacity(0.85)
-                    Ellipse4().opacity(0.85)
-                    Ellipse5().opacity(0.85)
-                    HelloWorld()
+                    if showColor1 {Ellipse1().opacity(0.9)}
+                    if showColor2 {Ellipse2().opacity(0.9)}
+                    if showColor3 {Ellipse3().opacity(0.9)}
+                    if showColor4 {Ellipse4().opacity(0.9)}
+                    if showColor5 {Ellipse5().opacity(0.9)}
+                    if showHW {HelloWorld().opacity(0.9)}
                 }
                 Spacer()
                 
                 Button {
-                    //
+                    self.showMenu()
                 } label: {
                     Text("start")
                         .foregroundColor(Color.white)
@@ -38,7 +57,24 @@ struct ContentView: View {
                 }.padding(.bottom)
             }
         }
+        }
         
+    }
+    func showMenu() {
+        showColor1 = true
+        showColor2 = true
+        showColor3 = true
+        showColor4 = true
+        showColor5 = true
+        showHW = true
+    }
+    func clear() {
+        showColor1 = false
+        showColor2 = false
+        showColor3 = false
+        showColor4 = false
+        showColor5 = false
+        showHW = false
     }
 }
 
