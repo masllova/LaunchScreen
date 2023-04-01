@@ -8,12 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-       @State var showColor1 = false
-        @State var showColor2 = false
-        @State var showColor3 = false
-        @State var showColor4 = false
-        @State var showColor5 = false
-        @State var showHW = false
+       @State var show = false
+        
     
     var body: some View {
         ZStack {
@@ -32,13 +28,26 @@ struct ContentView: View {
                 }
             VStack(spacing: 10) {
                 ZStack {
-                    if showColor1 {Ellipse1().opacity(0.9)}
-                    if showColor2 {Ellipse2().opacity(0.9)}
-                    if showColor3 {Ellipse3().opacity(0.9)}
-                    if showColor4 {Ellipse4().opacity(0.9)}
-                    if showColor5 {Ellipse5().opacity(0.9)}
-                    if showHW {HelloWorld().opacity(0.9)}
+                    Ellipse1()
+                        .opacity(show ? 0.9 : 0)
+                        .animation(.easeIn(duration: 0.75))
+                    Ellipse2()
+                        .opacity(show ? 0.9 : 0)
+                        .animation(.easeIn(duration: 1.5))
+                    Ellipse3()
+                        .opacity(show ? 0.9 : 0)
+                        .animation(.easeIn(duration: 2.25))
+                    Ellipse4()
+                        .opacity(show ? 0.9 : 0)
+                        .animation(.easeIn(duration: 3))
+                    Ellipse5()
+                        .opacity(show ? 0.9 : 0)
+                        .animation(.easeIn(duration: 3.75))
+                    HelloWorld()
+                        .opacity(show ? 1 : 0)
+                        .animation(.easeIn(duration: 4))
                 }
+                
                 Spacer()
                 
                 Button {
@@ -53,28 +62,23 @@ struct ContentView: View {
                         .cornerRadius(70)
                         .overlay(RoundedRectangle(cornerRadius: 70)
                             .stroke(Color.white, lineWidth: 3))
+                        
                     
                 }.padding(.bottom)
+                    
             }
         }
         }
         
     }
-    func showMenu() {
-        showColor1 = true
-        showColor2 = true
-        showColor3 = true
-        showColor4 = true
-        showColor5 = true
-        showHW = true
+    func showMenu()   {
+        withAnimation {
+            show = true
+        }
     }
+    
     func clear() {
-        showColor1 = false
-        showColor2 = false
-        showColor3 = false
-        showColor4 = false
-        showColor5 = false
-        showHW = false
+        show = false
     }
 }
 
@@ -109,7 +113,6 @@ struct Ellipse3: View {
         ZStack {
             Ellipse()
                 .fill(Color.white)
-                
             Ellipse()
                 .fill(LinearGradient(gradient: Gradient(colors: [Color(red: 0.46, green: 0.04, blue: 0.99, opacity: 0.53), Color(red: 0.79, green: 0.40, blue: 0.40, opacity: 0.49), Color(red: 1, green: 0.62, blue: 0.05, opacity: 0.47)]), startPoint: .top, endPoint: .bottom))
                 .rotationEffect(.degrees(90))
